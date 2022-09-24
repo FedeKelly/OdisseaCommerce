@@ -4,7 +4,7 @@ import "./Categorias.css"
 const Categorias = ({Categorias}) => {
     return(
         <li className='nav-item pe-3 ps-3' id="fondo">
-            <a class="nav-link active" aria-current="page" href="#">{Categorias}</a>
+            <a className="nav-link active" aria-current="page" href="#">{Categorias}</a>
         </li>
     )
 }

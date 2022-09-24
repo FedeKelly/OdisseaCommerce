@@ -4,8 +4,8 @@ import "./CartWidget.css"
 
 const CartWidget = () => {
     return(
-        <div className='w-auto border border-2 border-dark rounded p-1'>
-            <img className='Cart' src={CartIcon} alt="Carrito"/>
+        <div className='w-auto border border-1 border-dark rounded p-1'>
+            <img className='Cart p-1' src={CartIcon} alt="Carrito"/>
             0
         </div>
     )
