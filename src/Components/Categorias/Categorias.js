@@ -1,10 +1,11 @@
 import React from 'react';
 import "./Categorias.css"
+import { Link } from "react-router-dom";
 
 const Categorias = ({Categorias}) => {
     return(
         <li className='nav-item pe-3 ps-3' id="fondo">
-            <a className="nav-link active" aria-current="page" href="#">{Categorias}</a>
+            <Link to={`/category/${Categorias}`} className="nav-link active" aria-current="page">{Categorias}</Link>
         </li>
     )
 }

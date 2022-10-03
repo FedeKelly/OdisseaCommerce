@@ -3,12 +3,13 @@ import LogoNavbar from '../../Images/LogoNavbar.jpg';
 import CartWidget from "./CartWidget.js";
 import "./Navbar.css";
 import Categorias from '../Categorias/Categorias';
+import { Link } from "react-router-dom"
 
 const Navbar = () => {
     return(
         <nav className='navbar navbar-expand-lg bg-light bg-opacity-50 pe-3 ps-3 pt-3'>
             <div className='container-fluid'>
-                <a className="navbar-brand" href="#"><img className="navbar-brand" src={LogoNavbar} alt="Logo"/></a>
+                <Link to="/"><div className="navbar-brand"><img className="navbar-brand" src={LogoNavbar} alt="Logo"/></div></Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
                 </button>

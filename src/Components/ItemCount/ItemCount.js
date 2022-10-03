@@ -12,7 +12,7 @@ const ItemCount = ({stockExistente}) => {
     }
 
      const onAdd = () => {
-        {compra=count}
+        compra=count
         console.log(compra)
     }
 
