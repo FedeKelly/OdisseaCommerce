@@ -2,25 +2,25 @@
 Clonar repositorio de GitHub
 
 # Librerías a instalar
-React
-React-router-dom
-Bootstrap
-SweetAlert para React
+React \
+React-router-dom \
+Bootstrap \
+SweetAlert para React \
 
 # Crear base de datos
-Se debe crear una base de datos en firebase con la siguiente configuración:
-Nombre de Colección: Productos
-Cada documento debe tener:
-name: nombre corto del producto
-category: categoría a definir
-descripcion: Descripción larga del producto
-price: precio del producto en números
-stock: stock existente en números
-img: nombre del archivo, sin extensión
+Se debe crear una base de datos en firebase con la siguiente configuración: \
+Nombre de Colección: Productos \
+Cada documento debe tener: \
+name: nombre corto del producto \
+category: categoría a definir \
+descripcion: Descripción larga del producto \
+price: precio del producto en números \
+stock: stock existente en números \
+img: nombre del archivo, sin extensión \
 
 # Imágenes
-Las imágenes son llamadas con la siguiente ruta. Se deben agregar las imágenes con formato .png, en la carpeta Images a tal fin.
-"../../Images/"+ (product.img) +".png"
+Las imágenes son llamadas con la siguiente ruta. Se deben agregar las imágenes con formato .png, en la carpeta Images a tal fin. \
+"../../Images/"+ (product.img) +".png" \
 
 # Getting Started with Create React App
 
