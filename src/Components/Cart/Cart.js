@@ -6,6 +6,7 @@ import { CartContext } from '../../Context/CartContext';
 import { Link } from "react-router-dom";
 
 
+
 const Cart = () => {
 
     const {cart} = useContext(CartContext)
@@ -13,13 +14,7 @@ const Cart = () => {
     const { getTotalAmount } = useContext(CartContext)
     const totalAmount = getTotalAmount()
     const { removeItem } = useContext(CartContext)
-    let idToRemove = 0
     console.log(products)
-    
-    const eliminar = () => {
-        
-       
-    }
     
     if(totalAmount === 0){
         return(
@@ -47,7 +42,7 @@ const Cart = () => {
                         <h5 className="card-title">{product.name}</h5>
                         <p className="card-text">{product.descripcion}</p>
                     </div>
-                    <button className="btn btn-light btn-sm" onClick={eliminar}>Eliminar</button>
+                    <button className="btn btn-light btn-sm" onClick={(e)=>removeItem(product.id)}>Eliminar</button>
                     <h5 className="card-title p-2 m-2">{product.count} unidades x $ {product.price}</h5>
                 </div>
                 )}

@@ -4,8 +4,10 @@ import Item from '../Item/Item';
 import Loading from "../../Images/loading-1.gif";
 //import { getProduct } from "../../MockProducts";
 import { useParams } from "react-router-dom";
-import { doc , getDoc } from 'firebase/firestore';
-import { db } from "../../services/firebase"
+//import { doc , getDoc } from 'firebase/firestore';
+//import { db } from "../../services/firebase"
+import {getProduct} from "../../services/firebase/Firestore"
+
 
 const ItemListDetailed = ({greeting}) => {
 
@@ -16,7 +18,7 @@ const ItemListDetailed = ({greeting}) => {
 
     useEffect(() => {
 
-        const docRef = doc(db, "Productos", productId)
+        /*const docRef = doc(db, "Productos", productId)
 
         getDoc(docRef).then(doc =>{
             console.log(docRef)
@@ -24,8 +26,10 @@ const ItemListDetailed = ({greeting}) => {
             const data = doc.data()
             const productAdapted = { id: doc.id, ...data }
 
-            setProduct(productAdapted)
-        }).catch(err =>{
+            setProduct(productAdapted)}*/
+        getProduct(productId).then(product =>{
+            setProduct(product)}
+        ).catch(error =>{
             setError(true)
         }).finally(()=>{
             setLoading(false)

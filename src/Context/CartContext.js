@@ -43,6 +43,7 @@ const getTotalAmount = () => {
 }
 
 const removeItem = (id) => {
+    console.log(`Item eliminado ${id}`)
     const cartWithoutItem = cart.filter(prod => prod.id !== id)
     setCart(cartWithoutItem)
   }

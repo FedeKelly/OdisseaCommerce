@@ -6,16 +6,16 @@ import { CartContext } from "../../Context/CartContext";
 import { Link } from "react-router-dom"
 import { getDocs, addDoc, collection, where, query, documentId, writeBatch } from "firebase/firestore"
 import { db } from "../../services/firebase"
-import swal from "sweetalert"
+import swal from "@sweetalert/with-react"
+//import {createOrder} from "../../services/firebase/Firestore"
 
 
-const Chekcout = () => {
+const Checkout = () => {
     const [loading, setLoading] = useState(false)
     const {cart, getTotalAmount, clearCart} = useContext(CartContext)
     const totalAmount = getTotalAmount()
     const { register, handleSubmit } = useForm()
 
-    
     const createOrder = async (datosComprador) =>{
        setLoading(true)
         try{
@@ -57,7 +57,7 @@ const Chekcout = () => {
             text: `Tu orden fue confirmada. Su ID de referencia es ${orderAdded.id}`,
             icon: "success",
             button: "OK",
-          });
+          }          );
         console.log(`El id de su orden es: ${orderAdded.id}`)
         clearCart()
     } else {
@@ -81,8 +81,9 @@ const Chekcout = () => {
 }
 }
 
+
 if(loading) {
-    return <h1>Su orden se esta generando...</h1>
+    return <h1 className="text-center text-white">Su orden se esta generando...</h1>
 }
     return(
         <div className="mb-3 row d-flex justify-content-center">
@@ -102,4 +103,4 @@ if(loading) {
     )
 }
 
-export default Chekcout
+export default Checkout
