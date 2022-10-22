@@ -12,7 +12,8 @@ const Item = ({product}) => {
                     <h5 className="card-title">{product.name}</h5>
                     <p className="card-text">{product.descripcion}</p>
                 </div>
-                <ItemCount className="p-2 m-2" stockExistente={product.stock} />
+                <ItemCount className="p-2 m-2" product={product} />
+                <h5 className="card-title p-2 m-2">Precio: $ {product.price}</h5>
             </div>
             
         </div>

@@ -1,9 +1,11 @@
 import React, { useState,useEffect } from 'react';
-import { getProducts, getProductsByCategory } from '../../MockProducts';
+//import { getProducts, getProductsByCategory } from '../../MockProducts';
 import "./ItemListContainer.css";
 import ItemList from '../ItemList/ItemList';
 import Loading from "../../Images/loading-1.gif"
 import { useParams } from "react-router-dom";
+import { getDocs, collection, query, where } from "firebase/firestore"
+import { db } from "../../services/firebase"
 
 const ItemListContainer = ({greetings}) => {
 
@@ -14,23 +16,25 @@ const ItemListContainer = ({greetings}) => {
     console.log(categoryId)
     
     useEffect(() => {
-        if(!categoryId){
-        getProducts().then(res =>{
-            setProducts(res)
-        }).catch(err =>{
-            setError(true)
-        }).finally(()=>{
-            setLoading(false)
-        })} else{       
-            getProductsByCategory(categoryId).then(res =>{
-            setProducts(res)
-        }).catch(err =>{
-            setError(true)
-        }).finally(()=>{
-            setLoading(false)
-        })
+        
+        const collectionRef = categoryId ?
+        query(collection(db, "Productos"), where("category", "==", categoryId))
+        : collection(db, "Productos")
 
-        }
+        console.log(collectionRef)
+
+        getDocs(collectionRef).then(response => {
+            console.log(response)
+            const productsAddapted = response.docs.map(doc =>{
+                const data = doc.data()
+                return ({id: doc.id, ...data})
+            })
+            setProducts(productsAddapted)
+        })
+        .catch(err =>{
+            setError(true)
+        }).finally(()=>{
+            setLoading(false)})
     },[categoryId])
 
 if(error === true){
@@ -47,7 +51,9 @@ if(loading === true){
     return(
         <div>
             <h1 className="ItemListContainer text-center text-white">{greetings}</h1>
-            <ItemList products={products} />
+            <div className='d-flex justify-content-center'>
+                <ItemList products={products} />
+            </div>
         </div>
     )
 
