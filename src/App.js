@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Cart from "./Components/Cart/Cart"
 import {BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartContextProvider } from './Context/CartContext.js';
-import Chekcout from './Components/Checkout/Checkout';
+import Checkout from './Components/Checkout/Checkout';
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
                   <Route path="/category/:categoryId" element={<ItemListContainer greetings={"Estos son nuestros productos"}/>}></Route>
                   <Route path="/detail/:productId" element={<ItemListDetailed greeting={"Detalle de Productos"}/>}></Route>
                   <Route path="/Cart" element={<Cart/>}></Route>
-                  <Route path="/Checkout" element={<Chekcout/>}></Route>
+                  <Route path="/Checkout" element={<Checkout/>}></Route>
                   <Route path='*' element={<h1>404 NOT FOUND</h1>} /> 
               </Routes>
           </div>

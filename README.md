@@ -1,3 +1,7 @@
+# Proyecto final para el curso de React Coderhouse
+Emula un e-commerce. El mismo fue creado con conceptos de React, firebas para los datos y bootstrap mayormente para sus estilos.\
+A continuación se detallan los pasos para poder utilizarlo.
+
 # Inicio
 Clonar repositorio de GitHub
 
@@ -16,11 +20,14 @@ category: categoría a definir \
 descripcion: Descripción larga del producto \
 price: precio del producto en números \
 stock: stock existente en números \
-img: nombre del archivo, sin extensión \
+img: nombre del archivo, sin extensión 
+
+# Vincular base de datos
+Se sugiere crear el archivo .env a nivel de src, con las keys correspondientes que otorga firebase.
 
 # Imágenes
 Las imágenes son llamadas con la siguiente ruta. Se deben agregar las imágenes con formato .png, en la carpeta Images a tal fin. \
-"../../Images/"+ (product.img) +".png" \
+"../../Images/"+ (product.img) +".png" 
 
 # Getting Started with Create React App
 

@@ -1,7 +1,7 @@
 import React from "react";
 import "./Checkout.css"
 import { useForm } from "react-hook-form"
-import { useContext, useState } from "react";
+import { useContext, useState, useNavigate } from "react";
 import { CartContext } from "../../Context/CartContext";
 import { Link } from "react-router-dom"
 import { getDocs, addDoc, collection, where, query, documentId, writeBatch } from "firebase/firestore"
@@ -15,6 +15,7 @@ const Checkout = () => {
     const {cart, getTotalAmount, clearCart} = useContext(CartContext)
     const totalAmount = getTotalAmount()
     const { register, handleSubmit } = useForm()
+    const navigate = useNavigate()
 
     const createOrder = async (datosComprador) =>{
        setLoading(true)
@@ -60,6 +61,7 @@ const Checkout = () => {
           }          );
         console.log(`El id de su orden es: ${orderAdded.id}`)
         clearCart()
+        navigate("/")
     } else {
         let nameSinStock = []
         outOfStock.forEach(prod => {
