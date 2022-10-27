@@ -9,7 +9,7 @@ Clonar repositorio de GitHub
 React \
 React-router-dom \
 Bootstrap \
-SweetAlert para React \
+SweetAlert \
 
 # Crear base de datos
 Se debe crear una base de datos en firebase con la siguiente configuración: \
