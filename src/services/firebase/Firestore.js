@@ -1,9 +1,7 @@
-import React from "react";
-import { doc, getDoc, getDocs, collection, query, where, writeBatch, addDoc, documentId } from "firebase/firestore"
+import { doc, getDoc, getDocs, collection, query, where, documentId, writeBatch,addDoc } from "firebase/firestore"
 import { db } from "."
-import { useContext } from 'react';
-import { CartContext } from "../../Context/CartContext"
-
+import { CartContext } from "../../Context/CartContext";
+import { useContext } from "react";
 
 export const getProducts = (categoryId) => {
     return new Promise((resolve, reject)=>{
@@ -47,3 +45,54 @@ export const getProduct = (productId) =>{
 })
 }
 
+
+
+export const usePushOrder = async (objOrder) =>{
+
+    const {cart} = useContext(CartContext)
+
+    try{
+        const ids = cart.map(prod => prod.id)
+        const productsRef = collection(db, 'Productos')
+    
+        const productsAddedFromFirestore = await getDocs(query(productsRef, where(documentId(), 'in' , ids)))
+        const { docs } = productsAddedFromFirestore
+        console.log(productsAddedFromFirestore)
+        
+        const batch = writeBatch(db)
+        const outOfStock = []
+    
+        docs.forEach(doc => {
+            const dataDoc = doc.data()
+            const stockDb = dataDoc.stock
+    
+            const productAddedToCart = cart.find(prod => prod.id === doc.id)
+            const prodQuantity = productAddedToCart? productAddedToCart.count : 1000000
+    
+            if(stockDb >= prodQuantity) {
+                batch.update(doc.ref, { stock: stockDb - prodQuantity })
+            } else {
+                outOfStock.push({ id: doc.id, ...dataDoc})
+            }
+        })
+    
+        if(outOfStock.length === 0) {
+            await batch.commit()
+
+            const orderRef = collection(db, 'orders')
+            const orderAdded = await addDoc(orderRef, objOrder)
+
+            return new Promise ((resolve)=>{
+            addDoc(orderRef, objOrder).then(resolve(orderAdded.id))
+            
+        })} else {
+            return new Promise ((resolve) =>{
+            let nameSinStock = []
+            outOfStock.forEach(prod => {
+                nameSinStock.push(prod.name)
+            }).then(resolve(nameSinStock.toString()))
+            } )
+        }
+} catch (error) {
+    console.log(error)}
+}

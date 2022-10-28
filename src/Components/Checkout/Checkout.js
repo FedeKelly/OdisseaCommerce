@@ -7,7 +7,6 @@ import { Link, redirect } from "react-router-dom"
 import { getDocs, addDoc, collection, where, query, documentId, writeBatch } from "firebase/firestore"
 import { db } from "../../services/firebase"
 import swal from 'sweetalert';
-//import {createOrder} from "../../services/firebase/Firestore"
 
 
 const Checkout = () => {
@@ -18,10 +17,11 @@ const Checkout = () => {
     
     const createOrder = async (datosComprador) =>{
        setLoading(true)
-        try{
+        
     const objOrder ={datosComprador, cart, totalAmount}
     console.log(objOrder)
-    
+
+        try{
     const ids = cart.map(prod => prod.id)
     const productsRef = collection(db, 'Productos')
 
@@ -81,7 +81,7 @@ const Checkout = () => {
     console.log(error)
 } finally {
     setLoading(false)
-}
+    }
 }
 
 
@@ -124,7 +124,9 @@ if(loading) {
                     )}
                 <div className="d-flex justify-content-center">
                     <button className="btn btn-primary m-2 p-2" type="submit">Confirmar</button>
-                    <Link to="/Cart"><button className="btn btn-primary m-2 p-2" type="button">Volver</button></Link>
+                    {totalAmount > 0 ?
+                    <Link to="/Cart"><button className="btn btn-primary m-2 p-2" type="button">Volver</button></Link>:
+                    <Link to="/"><button className="btn btn-primary m-2 p-2" type="button">Inicio</button></Link>}
                 </div>  
             </form>
         </div>
